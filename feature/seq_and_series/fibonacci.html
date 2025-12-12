@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fibonacci</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="head">
+    <h1>Fibonacci Series</h1>
+
+    <div id="inputs">
+      <input id="n_input" type="text" placeholder="Enter n (positive integer)">
+    </div>
+
+    <div id="results">
+      <textarea id="result" placeholder="Result" readonly></textarea>
+    </div>
+
+    <div id="buttons">
+      <button id="calcBtn" type="button">Calculate</button>
+    </div>
+  </div>
+
+<script>
+  // INTERNAL Fibonacci logic — zero conflict with AP/GP or factorial
+
+  const nInput = document.getElementById("n_input");
+  const resultEl = document.getElementById("result");
+  const calcBtn = document.getElementById("calcBtn");
+
+  function generateFibonacci() {
+      const raw = nInput.value.trim();
+
+      if (!/^\d+$/.test(raw) || Number(raw) <= 0) {
+          resultEl.value = "Enter a valid positive integer.";
+          return;
+      }
+
+      const n = Number(raw);
+      let fib = [];
+
+      for (let i = 0; i < n; i++) {
+          if (i === 0 || i === 1) fib.push(1);
+          else fib.push(fib[i - 1] + fib[i - 2]);
+      }
+
+      resultEl.value = fib.join(", ");
+  }
+
+  calcBtn.addEventListener("click", generateFibonacci);
+
+  nInput.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+          e.preventDefault();
+          generateFibonacci();
+      }
+  });
+</script>
+
+</body>
+</html>
