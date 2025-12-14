@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volume Converter</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="head">
+  <h1>Volume Converter</h1>
+
+  <div id="inputs">
+    <input id="valueInput" type="text" placeholder="Enter value">
+
+    <select id="fromUnit">
+      <option value="L">Liter (L)</option>
+      <option value="mL">Milliliter (mL)</option>
+      <option value="m3">Cubic meter (m³)</option>
+      <option value="gal">Gallon (US)</option>
+      <option value="qt">Quart (US)</option>
+      <option value="pt">Pint (US)</option>
+      <option value="cup">Cup (US)</option>
+    </select>
+
+    <select id="toUnit">
+      <option value="L">Liter (L)</option>
+      <option value="mL">Milliliter (mL)</option>
+      <option value="m3">Cubic meter (m³)</option>
+      <option value="gal">Gallon (US)</option>
+      <option value="qt">Quart (US)</option>
+      <option value="pt">Pint (US)</option>
+      <option value="cup">Cup (US)</option>
+    </select>
+  </div>
+
+  <div id="results">
+    <textarea id="result" placeholder="Result" disabled></textarea>
+  </div>
+
+  <div id="buttons">
+    <button onclick="convert()">Convert</button>
+    <button onclick="swap()">Swap</button>
+  </div>
+</div>
+
+<script>
+/* conversion factors → liters */
+const toLiter = {
+  L: 1,
+  mL: 0.001,
+  m3: 1000,
+  gal: 3.785411784,
+  qt: 0.946352946,
+  pt: 0.473176473,
+  cup: 0.2365882365
+};
+
+function convert() {
+  const raw = valueInput.value.trim();
+  if (raw === "") {
+    result.value = "Enter a value";
+    return;
+  }
+
+  const value = Number(raw);
+  if (!Number.isFinite(value)) {
+    result.value = "Invalid number";
+    return;
+  }
+
+  const from = fromUnit.value;
+  const to = toUnit.value;
+
+  const liters = value * toLiter[from];
+  const converted = liters / toLiter[to];
+
+  result.value = `${value} ${from} = ${converted} ${to}`;
+}
+
+function swap() {
+  const temp = fromUnit.value;
+  fromUnit.value = toUnit.value;
+  toUnit.value = temp;
+  result.value = "";
+}
+</script>
+
+</body>
+</html>

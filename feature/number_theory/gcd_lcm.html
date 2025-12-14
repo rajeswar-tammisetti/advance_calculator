@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>GCD & LCM</title>
+</head>
+<body>
+
+  <div id="head">
+    <h1 id="title">GCD Calculator</h1>
+
+    <div id="inputs">
+      <input id="a_input" type="text" placeholder="Enter a">
+      <input id="b_input" type="text" placeholder="Enter b">
+    </div>
+
+    <div id="results">
+      <textarea id="result" placeholder="Result" readonly></textarea>
+    </div>
+
+    <div id="buttons">
+      <button onclick="calculate()">Calculate</button>
+      <button id="toggleBtn" onclick="toggleMode()">LCM</button>
+    </div>
+  </div>
+
+<script>
+  let mode = "GCD"; // current mode
+
+  function toggleMode() {
+    const title = document.getElementById("title");
+    const toggleBtn = document.getElementById("toggleBtn");
+
+    if (mode === "GCD") {
+      mode = "LCM";
+      title.textContent = "LCM Calculator";
+      toggleBtn.textContent = "GCD";
+    } else {
+      mode = "GCD";
+      title.textContent = "GCD Calculator";
+      toggleBtn.textContent = "LCM";
+    }
+
+    document.getElementById("result").value = "";
+  }
+
+  function gcd(a, b) {
+    a = Math.abs(a);
+    b = Math.abs(b);
+
+    while (b !== 0) {
+      let temp = b;
+      b = a % b;
+      a = temp;
+    }
+    return a;
+  }
+
+  function lcm(a, b) {
+    if (a === 0 || b === 0) return 0;
+    return Math.abs(a * b) / gcd(a, b);
+  }
+
+  function calculate() {
+    const a = parseInt(document.getElementById("a_input").value);
+    const b = parseInt(document.getElementById("b_input").value);
+    const result = document.getElementById("result");
+
+    if (isNaN(a) || isNaN(b)) {
+      result.value = "Enter valid integers";
+      return;
+    }
+
+    if (mode === "GCD") {
+      result.value = "GCD = " + gcd(a, b);
+    } else {
+      result.value = "LCM = " + lcm(a, b);
+    }
+  }
+</script>
+
+</body>
+</html>

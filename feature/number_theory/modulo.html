@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo Operation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="head">
+    <h1>Modulo Calculator</h1>
+
+    <div id="inputs">
+      <input id="a_input" type="text" placeholder="Enter a">
+      <input id="b_input" type="text" placeholder="Enter b">
+    </div>
+
+    <div id="results">
+      <textarea id="result" placeholder="Result" readonly></textarea>
+    </div>
+
+    <div id="buttons">
+      <button onclick="calculateModulo()">Calculate</button>
+    </div>
+  </div>
+
+<script>
+function calculateModulo() {
+    const a = parseInt(document.getElementById("a_input").value);
+    const b = parseInt(document.getElementById("b_input").value);
+    const result = document.getElementById("result");
+
+    if (isNaN(a) || isNaN(b)) {
+        result.value = "Enter valid integers";
+        return;
+    }
+
+    if (b === 0) {
+        result.value = "Modulo by zero is not allowed";
+        return;
+    }
+
+    result.value = "a % b = " + (a % b);
+}
+</script>
+
+</body>
+</html>

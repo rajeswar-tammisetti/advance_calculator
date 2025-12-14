@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cubic Equation Solver</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="head">
+    <h1>Cubic Equation Solver</h1>
+
+    <!-- Display equation -->
+    <h2 id="equation">ax³ + bx² + cx + d = 0</h2>
+
+    <div id="inputs">
+      <input id="a_input" type="text" placeholder="Enter a">
+      <input id="b_input" type="text" placeholder="Enter b">
+      <input id="c_input" type="text" placeholder="Enter c">
+      <input id="d_input" type="text" placeholder="Enter d">
+    </div>
+
+    <div id="results">
+      <textarea id="result" placeholder="Result" readonly></textarea>
+    </div>
+
+    <div id="buttons">
+      <button onclick="solve()">Solve</button>
+    </div>
+  </div>
+
+<script>
+function solve() {
+    const aRaw = document.getElementById("a_input").value.trim();
+    const bRaw = document.getElementById("b_input").value.trim();
+    const cRaw = document.getElementById("c_input").value.trim();
+    const dRaw = document.getElementById("d_input").value.trim();
+
+    const equation = document.getElementById("equation");
+    const result = document.getElementById("result");
+
+    equation.textContent = `${aRaw || "a"}x³ + ${bRaw || "b"}x² + ${cRaw || "c"}x + ${dRaw || "d"} = 0`;
+
+    if (!aRaw || !bRaw || !cRaw || !dRaw) {
+        result.value = "Please enter all coefficients.";
+        return;
+    }
+
+    const a = Number(aRaw);
+    const b = Number(bRaw);
+    const c = Number(cRaw);
+    const d = Number(dRaw);
+
+    if (![a, b, c, d].every(Number.isFinite)) {
+        result.value = "Enter valid numeric values.";
+        return;
+    }
+
+    if (a === 0) {
+        result.value = "Not a cubic equation (a = 0).";
+        return;
+    }
+
+    // Convert to depressed cubic: x = y − b/(3a)
+    const p = (3*a*c - b*b) / (3*a*a);
+    const q = (2*b*b*b - 9*a*b*c + 27*a*a*d) / (27*a*a*a);
+    const shift = -b / (3*a);
+
+    const discriminant = (q*q)/4 + (p*p*p)/27;
+
+    if (discriminant > 0) {
+        // One real root
+        const u = Math.cbrt(-q/2 + Math.sqrt(discriminant));
+        const v = Math.cbrt(-q/2 - Math.sqrt(discriminant));
+        const x = u + v + shift;
+
+        result.value =
+            "One real root:\n" +
+            "x = " + x;
+    }
+    else if (discriminant === 0) {
+        // Multiple real roots
+        const u = Math.cbrt(-q/2);
+        const x1 = 2*u + shift;
+        const x2 = -u + shift;
+
+        result.value =
+            "Multiple real roots:\n" +
+            "x₁ = " + x1 + "\n" +
+            "x₂ = " + x2;
+    }
+    else {
+        // Three distinct real roots
+        const r = Math.sqrt(-(p*p*p)/27);
+        const phi = Math.acos(-q/(2*r));
+        const t = 2 * Math.cbrt(r);
+
+        const x1 = t * Math.cos(phi/3) + shift;
+        const x2 = t * Math.cos((phi + 2*Math.PI)/3) + shift;
+        const x3 = t * Math.cos((phi + 4*Math.PI)/3) + shift;
+
+        result.value =
+            "Three real roots:\n" +
+            "x₁ = " + x1 + "\n" +
+            "x₂ = " + x2 + "\n" +
+            "x₃ = " + x3;
+    }
+}
+</script>
+
+</body>
+</html>

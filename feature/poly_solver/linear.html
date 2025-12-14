@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linear Equation Solver</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="head">
+    <h1>Linear Equation Solver</h1>
+
+    <!-- Display equation -->
+    <h2 id="equation">ax + b = 0</h2>
+
+    <div id="inputs">
+      <input id="a_input" type="text" placeholder="Enter a">
+      <input id="b_input" type="text" placeholder="Enter b">
+    </div>
+
+    <div id="results">
+      <textarea id="result" placeholder="Result" readonly></textarea>
+    </div>
+
+    <div id="buttons">
+      <button onclick="solve()">Solve</button>
+    </div>
+  </div>
+
+<script>
+function solve() {
+    const aRaw = document.getElementById("a_input").value.trim();
+    const bRaw = document.getElementById("b_input").value.trim();
+    const result = document.getElementById("result");
+    const equation = document.getElementById("equation");
+
+    const a = Number(aRaw);
+    const b = Number(bRaw);
+
+    equation.textContent = `${aRaw || "a"}x + ${bRaw || "b"} = 0`;
+
+    if (isNaN(a) || isNaN(b)) {
+        result.value = "Enter valid numeric values for a and b.";
+        return;
+    }
+
+    if (a === 0 && b === 0) {
+        result.value = "Infinite solutions";
+        return;
+    }
+
+    if (a === 0 && b !== 0) {
+        result.value = "No solution (0x + b = 0)";
+        return;
+    }
+
+    // ax + b = 0  -> x = -b / a
+    const x = -b / a;
+    result.value = "Solution: x = " + x;
+}
+</script>
+
+</body>
+</html>

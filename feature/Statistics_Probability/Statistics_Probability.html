@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics & Probability</title>
+    <link rel="stylesheet" href="../feature_body.css">
+</head>
+<body>
+    <div id="main-body">
+        <div id="left">
+            <h1>Statistics & Probability</h1>
+            <a href="#" onclick="central_tendency()">Measures Of Central Tendency</a>
+            <a href="#" onclick="permutation()">Permutations</a>
+            <a href="#" onclick="combination()">Combination</a>
+        </div>
+        <div id="right">
+            <iframe id="right-frame" src="" frameborder="0"></iframe>
+        </div>
+    </div>
+    <script>
+        const frame=document.getElementById("right-frame");
+        function central_tendency(){
+            frame.src="mean_median_mode.html";
+        }
+        function permutation(){
+            frame.src="permutation.html";
+        }
+        function combination(){
+            frame.src="combination.html";
+            return;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algebra</title>
+    <link rel="stylesheet" href="../feature_body.css">
+    <style>
+        a{
+            min-width: 10em;
+        }
+    </style>
+    
+</head>
+<body>
+    <div id="main-body">
+        <div id="left" class="glass-panel">
+            <h1 >Algebra</h1>
+            <a href="#" onclick="linear()" style="text-align: center;">Linear</a>
+            <a href="#" onclick="quadratic()" style="text-align: center;">Quadratic</a>
+            <a href="#" onclick="cubic()" style="text-align: center;">Cubic</a>
+        </div>
+        <div id="right" style="min-width: ;">
+            <iframe id="right-frame" src="" frameborder="0"></iframe>
+        </div>
+    </div>
+    <script>
+        const frame=document.getElementById("right-frame");
+        function linear(){
+            frame.src="linear.html";
+            return;
+        }
+        function quadratic(){
+            frame.src="quadratic.html";
+            return;
+        }
+        function cubic(){
+            frame.src="cubic.html";
+            return;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weight Converter</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="head" style="padding: 0px;">
+  <h1>Weight / Mass Converter</h1>
+
+  <div id="inputs">
+    <input id="valueInput" type="text" placeholder="Enter value">
+
+    <select id="fromUnit">
+      <option value="kg">Kilogram (kg)</option>
+      <option value="g">Gram (g)</option>
+      <option value="mg">Milligram (mg)</option>
+      <option value="lb">Pound (lb)</option>
+      <option value="oz">Ounce (oz)</option>
+      <option value="t">Metric Ton (t)</option>
+    </select>
+
+    <select id="toUnit">
+      <option value="kg">Kilogram (kg)</option>
+      <option value="g">Gram (g)</option>
+      <option value="mg">Milligram (mg)</option>
+      <option value="lb">Pound (lb)</option>
+      <option value="oz">Ounce (oz)</option>
+      <option value="t">Metric Ton (t)</option>
+    </select>
+  </div>
+
+  <div id="results">
+    <textarea id="result" placeholder="Result" disabled></textarea>
+  </div>
+
+  <div id="buttons">
+    <button onclick="convert()">Convert</button>
+    <button onclick="swap()">Swap</button>
+  </div>
+</div>
+
+<script>
+/* conversion factors → kilograms */
+const toKg = {
+  kg: 1,
+  g: 0.001,
+  mg: 0.000001,
+  lb: 0.45359237,
+  oz: 0.028349523125,
+  t: 1000
+};
+
+function convert() {
+  const raw = valueInput.value.trim();
+  if (raw === "") {
+    result.value = "Enter a value";
+    return;
+  }
+
+  const value = Number(raw);
+  if (!Number.isFinite(value)) {
+    result.value = "Invalid number";
+    return;
+  }
+
+  const from = fromUnit.value;
+  const to = toUnit.value;
+
+  const kg = value * toKg[from];
+  const converted = kg / toKg[to];
+
+  result.value = `${value} ${from} = ${converted} ${to}`;
+}
+
+function swap() {
+  const temp = fromUnit.value;
+  fromUnit.value = toUnit.value;
+  toUnit.value = temp;
+  result.value = "";
+}
+</script>
+
+</body>
+</html>

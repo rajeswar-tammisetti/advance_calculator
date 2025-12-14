@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prime</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="head">
+    <h1>Prime Checker</h1>
+
+    <div id="inputs">
+      <input id="n_input" type="text" placeholder="Enter n (positive number)">
+    </div>
+
+    <div id="results">
+      <textarea id="result" placeholder="Result" readonly></textarea>
+    </div>
+
+    <div id="buttons">
+      <button id="calcBtn" type="button" onclick="prime()">Calculate</button>
+    </div>
+  </div>
+
+<script>
+  function prime(){
+    const raw_num=document.getElementById("n_input").value.trim();
+    const num=parseInt(raw_num,10);
+    const result=document.getElementById("result");
+    
+    if (!/^\d+$/.test(raw_num) || num <= 0) {
+        result.value = "! Enter a valid number";
+        return;
+    }
+    else if(num==1){
+        result.value="Neither Prime nor Composite Number"
+        return;
+    }
+    let condition=1;
+    for (let i=2;i*i<=num;i++){
+        if(num%i===0){
+            result.value = "It is NOT a prime number";
+            return;
+        }
+    }
+
+    result.value="It is a prime";
+}
+</script>
+
+</body>
+</html>

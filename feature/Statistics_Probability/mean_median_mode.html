@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mean Median Mode</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="head">
+    <h1 id="title">Mean</h1>
+    <h2 id="formula">Mean = Σx / n</h2>
+
+    <div id="inputs">
+        <input id="numbers" type="text" placeholder="Enter numbers (e.g. 1,2,3)">
+    </div>
+
+    <div id="results">
+        <textarea id="result" placeholder="Result" readonly></textarea>
+    </div>
+
+    <div id="buttons">
+        <button onclick="calculate()">Calculate</button>
+        <button onclick="toggle()">Median</button>
+    </div>
+</div>
+
+<script>
+let modeIndex = 0;
+const modes = ["Mean", "Median", "Mode"];
+
+function toggle() {
+    modeIndex = (modeIndex + 1) % modes.length;
+
+    document.getElementById("title").textContent = modes[modeIndex];
+    document.getElementById("formula").textContent =
+        modeIndex === 0 ? "Mean = Σx / n" :
+        modeIndex === 1 ? "Median = middle value" :
+                          "Mode = most frequent value";
+
+    document.querySelector("#buttons button:last-child").textContent =
+        modes[(modeIndex + 1) % modes.length];
+}
+
+function calculate() {
+    const raw = document.getElementById("numbers").value.trim();
+    const result = document.getElementById("result");
+
+    if (raw === "") {
+        result.value = "Enter some numbers.";
+        return;
+    }
+
+    const nums = raw.split(/[\s,]+/).map(Number);
+
+    if (nums.some(n => !Number.isFinite(n))) {
+        result.value = "Invalid number detected.";
+        return;
+    }
+
+    if (modeIndex === 0) {
+        // Mean
+        const mean = nums.reduce((a,b)=>a+b,0)/nums.length;
+        result.value = "Mean = " + mean;
+    }
+    else if (modeIndex === 1) {
+        // Median
+        const sorted = [...nums].sort((a,b)=>a-b);
+        const mid = Math.floor(sorted.length/2);
+        const median =
+            sorted.length % 2
+                ? sorted[mid]
+                : (sorted[mid-1]+sorted[mid])/2;
+        result.value = "Median = " + median;
+    }
+    else {
+        // Mode
+        const freq = {};
+        nums.forEach(n => freq[n] = (freq[n] || 0) + 1);
+
+        const max = Math.max(...Object.values(freq));
+        const modes = Object.keys(freq)
+            .filter(k => freq[k] === max);
+
+        result.value =
+            max === 1
+                ? "No mode"
+                : "Mode = " + modes.join(", ");
+    }
+}
+</script>
+
+</body>
+</html>

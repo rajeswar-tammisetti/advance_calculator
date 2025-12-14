@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Combinations</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="head">
+    <h1>Combinations</h1>
+    <h2>nCr = n! / r!(n − r)!</h2>
+
+    <div id="inputs">
+        <input id="n" type="text" placeholder="Enter n">
+        <input id="r" type="text" placeholder="Enter r">
+    </div>
+
+    <div id="results">
+        <textarea id="result" placeholder="Result" readonly></textarea>
+    </div>
+
+    <div id="buttons">
+        <button onclick="calculate()">Calculate</button>
+    </div>
+</div>
+
+<script>
+function factorial(x) {
+    let f = 1;
+    for (let i = 2; i <= x; i++) f *= i;
+    return f;
+}
+
+function calculate() {
+    const nRaw = document.getElementById("n").value.trim();
+    const rRaw = document.getElementById("r").value.trim();
+    const result = document.getElementById("result");
+
+    if (!nRaw || !rRaw) {
+        result.value = "Enter both n and r.";
+        return;
+    }
+
+    const n = Number(nRaw);
+    const r = Number(rRaw);
+
+    if (!Number.isInteger(n) || !Number.isInteger(r) || n < 0 || r < 0) {
+        result.value = "n and r must be non-negative integers.";
+        return;
+    }
+
+    if (r > n) {
+        result.value = "r cannot be greater than n.";
+        return;
+    }
+
+    const value = factorial(n) / (factorial(r) * factorial(n - r));
+    result.value = `nCr = ${value}`;
+}
+</script>
+
+</body>
+</html>

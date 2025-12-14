@@ -1,0 +1,162 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Consolas, "Courier New", monospace;
+}
+
+#head {
+    min-height: 100vh;
+    width: 100%;
+    padding: 32px 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+
+    background: rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+
+    border-radius: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+h1 {
+    margin: 0;
+    font-size: 48px;
+    text-align: center;
+}
+
+h2 {
+    margin: 0;
+    font-weight: normal;
+    text-align: center;
+}
+
+#inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+#inputs input {
+    width: 320px;
+    padding: 14px;
+    text-align: center;
+
+    border-radius: 30px;
+    border: none;
+
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255,255,255,0.32);
+    box-shadow:
+        0 10px 20px rgba(0,0,0,0.28),
+        inset 0 1px 0 rgba(255,255,255,0.35);
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+#inputs input:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.45);
+}
+
+#inputs input:focus {
+    outline: none;
+}
+
+#results textarea {
+    width: 320px;
+    height: 90px;
+    resize: none;
+
+    padding: 18px;
+    text-align: center;
+
+    border-radius: 30px;
+    border: none;
+
+    background: rgba(0,0,0,0.15);
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255,255,255,0.32);
+    box-shadow:
+        0 10px 20px rgba(0,0,0,0.28),
+        inset 0 1px 0 rgba(255,255,255,0.35);
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+#results textarea:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.45);
+}
+
+#results textarea:focus {
+    outline: none;
+}
+
+#buttons {
+    display: flex;
+    gap: 14px;
+}
+
+#buttons button {
+    min-width: 120px;
+    padding: 12px 18px;
+
+    border-radius: 28px;
+    border: none;
+    cursor: pointer;
+
+    font-family: Consolas, "Courier New", monospace;
+
+    background: rgba(0,0,0,0.15);
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255,255,255,0.32);
+    box-shadow:
+        0 10px 20px rgba(0,0,0,0.28),
+        inset 0 1px 0 rgba(255,255,255,0.35);
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+#buttons button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.5);
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 36px;
+    }
+
+    #inputs input,
+    #results textarea {
+        width: 90%;
+    }
+
+    #buttons {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+    #buttons button {
+        width: 90%;
+    }
+}

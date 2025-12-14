@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Theory & Modular Arithmetic</title>
+    <link rel="stylesheet" href="../feature_body.css">
+
+    
+</head>
+<body>
+    <div id="main-body">
+        <div id="left" class="glass-panel">
+            <h1>Number Theory & Modular Arithmetic</h1>
+            <a href="#" onclick="prime()" style="text-align: center;">Prime Number Checker</a>
+            <a href="#" onclick="gcd_lcm()" style="text-align: center;">GCD & LCM Calculator</a>
+            <a href="#" onclick="modulo()" style="text-align: center;">Modulo Operation</a>
+        </div>
+        <div id="right">
+            <iframe id="right-frame" src="" frameborder="0"></iframe>
+        </div>
+    </div>
+    <script>
+        const frame=document.getElementById("right-frame");
+        function prime(){
+            frame.src="prime.html";
+            return;
+        }
+        function gcd_lcm(){
+            frame.src="gcd_lcm.html";
+            return;
+        }
+        function modulo(){
+            frame.src="modulo.html";
+            return;
+        }
+    </script>
+</body>
+</html>

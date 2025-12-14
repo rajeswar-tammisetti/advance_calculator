@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temperature Converter</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="head">
+  <h1>Temperature Converter</h1>
+
+  <div id="inputs">
+    <input id="valueInput" type="text" placeholder="Enter temperature">
+
+    <select id="fromUnit">
+      <option value="C">Celsius (°C)</option>
+      <option value="F">Fahrenheit (°F)</option>
+      <option value="K">Kelvin (K)</option>
+    </select>
+
+    <select id="toUnit">
+      <option value="C">Celsius (°C)</option>
+      <option value="F">Fahrenheit (°F)</option>
+      <option value="K">Kelvin (K)</option>
+    </select>
+  </div>
+
+  <div id="results">
+    <textarea id="result" placeholder="Result" disabled></textarea>
+  </div>
+
+  <div id="buttons">
+    <button onclick="convert()">Convert</button>
+    <button onclick="swap()">Swap</button>
+  </div>
+</div>
+
+<script>
+function toCelsius(value, unit) {
+  switch (unit) {
+    case "C": return value;
+    case "F": return (value - 32) * 5 / 9;
+    case "K": return value - 273.15;
+  }
+}
+
+function fromCelsius(value, unit) {
+  switch (unit) {
+    case "C": return value;
+    case "F": return (value * 9 / 5) + 32;
+    case "K": return value + 273.15;
+  }
+}
+
+function convert() {
+  const raw = valueInput.value.trim();
+  if (raw === "") {
+    result.value = "Enter a value";
+    return;
+  }
+
+  const value = Number(raw);
+  if (!Number.isFinite(value)) {
+    result.value = "Invalid number";
+    return;
+  }
+
+  const from = fromUnit.value;
+  const to = toUnit.value;
+
+  const celsius = toCelsius(value, from);
+  const converted = fromCelsius(celsius, to);
+
+  result.value = `${value} ${from} = ${converted} ${to}`;
+}
+
+function swap() {
+  const temp = fromUnit.value;
+  fromUnit.value = toUnit.value;
+  toUnit.value = temp;
+  result.value = "";
+}
+</script>
+
+</body>
+</html>
