@@ -26,7 +26,6 @@ function calculate_factorial(){
 
 
 
-            // AP and GP
 
 const titleEl = document.getElementById("title");
 const nthFormula = document.getElementById("nth_formula");
@@ -36,7 +35,6 @@ const toggleBtn = document.getElementById("toggler");
 const resultEl = document.getElementById("result");
 const calcBtn = document.getElementById("calcBtn");
 
-// Toggle between AP and GP
 function gp_tog() {
     const current = titleEl.textContent.trim();
 
@@ -48,7 +46,7 @@ function gp_tog() {
         nthFormula.innerHTML = "a<sub>n</sub> = a × r<sup>n-1</sup>";
         sumFormula.innerHTML = "S<sub>n</sub> = a × (r<sup>n</sup> − 1) / (r − 1)";
 
-        toggleBtn.textContent = "AP"; // user can switch back
+        toggleBtn.textContent = "AP";
 
     } else {
 
@@ -61,10 +59,9 @@ function gp_tog() {
         toggleBtn.textContent = "GP";
     }
 
-    resultEl.value = ""; // clear previous result
+    resultEl.value = "";
 }
 
-// Calculate nth term and sum
 function calculate_terms() {
     const mode = titleEl.textContent.trim();
 

@@ -61,12 +61,10 @@ function calculate() {
     }
 
     if (modeIndex === 0) {
-        // Mean
         const mean = nums.reduce((a,b)=>a+b,0)/nums.length;
         result.value = "Mean = " + mean;
     }
     else if (modeIndex === 1) {
-        // Median
         const sorted = [...nums].sort((a,b)=>a-b);
         const mid = Math.floor(sorted.length/2);
         const median =
@@ -76,7 +74,6 @@ function calculate() {
         result.value = "Median = " + median;
     }
     else {
-        // Mode
         const freq = {};
         nums.forEach(n => freq[n] = (freq[n] || 0) + 1);
 

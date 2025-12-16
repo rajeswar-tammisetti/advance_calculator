@@ -77,7 +77,6 @@ h2 {
 #inputs input:focus {
     outline: none;
 }
-/* ===== SELECT (UNIT DROPDOWN) ===== */
 #inputs select {
     width: 320px;
     padding: 14px 18px;
@@ -99,20 +98,18 @@ h2 {
         inset 0 1px 0 rgba(255,255,255,0.35);
 
     cursor: pointer;
-    appearance: none;          /* remove native arrow */
+    appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
 
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* Hover */
 #inputs select:hover {
     transform: translateY(-4px);
     box-shadow: 0 6px 14px rgba(0,0,0,0.45);
 }
 
-/* Focus */
 #inputs select:focus {
     outline: none;
     box-shadow:
@@ -120,7 +117,6 @@ h2 {
         inset 0 1px 0 rgba(255,255,255,0.35);
 }
 
-/* ===== CUSTOM DROPDOWN ARROW ===== */
 #inputs {
     position: relative;
 }
